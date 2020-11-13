@@ -69,8 +69,9 @@ class Detector:
         self.classes = [c.strip() for c in open(classes_path).readlines() if c.strip()]
 
     def detect_video(
-        self, video_path, mode="default", min_prob=0.6, batch_size=2, show_progress=True
+        self, video_path, mode="default", min_prob=0.6, batch_size=2, show_progress=True, stop_label=[], stop_value=0.70
     ):
+        print(video_path)
         frame_indices, frames, fps, video_length = get_interest_frames_from_video(
             video_path
         )
@@ -99,6 +100,10 @@ class Detector:
 
         if not show_progress:
             progress_func = dummy
+
+        is_stop_label = False
+        if len(stop_label)>0:
+            is_stop_label = True
 
         for _ in progress_func(range(int(len(frames) / batch_size) + 1)):
             batch = frames[:batch_size]
@@ -134,6 +139,10 @@ class Detector:
                                 "label": label,
                             }
                         )
+
+                        # stop if label found
+                        if is_stop_label and (label in stop_label) and score>=stop_value:
+                            return all_results
 
         return all_results
 

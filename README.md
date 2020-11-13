@@ -50,7 +50,7 @@ docker run -it -p8080:8080 notaitech/nudenet:classifier
 # Detector
 docker run -it -p8080:8080 notaitech/nudenet:detector
 
-# See fastDeploy-file_client.py for running predictions via fastDeploy's REST endpoints 
+# See fastDeploy-file_client.py for running predictions via fastDeploy's REST endpoints
 wget https://raw.githubusercontent.com/notAI-tech/fastDeploy/master/cli/fastDeploy-file_client.py
 # Single input
 python fastDeploy-file_client.py --file PATH_TO_YOUR_IMAGE
@@ -141,9 +141,13 @@ detector.detect_video('path_to_video', batch_size=BATCH_SIZE, show_progress=BOOL
 
 ```
 
+# Example video check
+
+check `is_adult_video.py` for example fast detecting video
+
 # Notes:
 - detect_video and classify_video first identify the "unique" frames in a video and run predictions on them for significant performance improvement.
 - V1 of NudeDetector (available in master branch of this repo) was trained on 12000 images labelled by the good folks at cti-community.
-- V2 (current version) of NudeDetector is trained on 160,000 entirely auto-labelled (using classification heat maps and various other hybrid techniques) images. 
+- V2 (current version) of NudeDetector is trained on 160,000 entirely auto-labelled (using classification heat maps and various other hybrid techniques) images.
 - The entire data for the classifier is available at https://archive.org/details/NudeNet_classifier_dataset_v1
 - A part of the auto-labelled data (Images are from the classifier dataset above) used to train the base Detector is available at https://github.com/notAI-tech/NudeNet/releases/download/v0/DETECTOR_AUTO_GENERATED_DATA.zip
