@@ -64,7 +64,9 @@ python fastDeploy-file_client.py --dir PATH_TO_FOLDER --ext jpg
 **Installation**:
 ```bash
 # tensorflow/ tensorflow-gpu <= 1.15.4 is required
-pip install --upgrade nudenet
+# python 3.7
+python setup.py --install
+
 ```
 
 **Classifier Usage**:
